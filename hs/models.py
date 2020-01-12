@@ -47,17 +47,17 @@ class Version(models.Model):
 
 class Minion(models.Model):
     name = models.CharField(max_length=50)
-    cost = models.IntegerField()
+    cost = models.IntegerField('cost')
     job = models.CharField(max_length=50, choices=JOB_CHOICE)
     amount = models.CharField(max_length=30, choices=AMOUNT_CHOICE)
     others = models.CharField(max_length=800)
-    attact = models.IntegerField()
-    health = models.IntegerField()
+    attact = models.IntegerField('attact')
+    health = models.IntegerField('health')
 
 
 class Magic(models.Model):
     name = models.CharField(max_length=50)
-    cost = models.IntegerField()
+    cost = models.IntegerField('cost')
     others = models.CharField(max_length=800)
     job = models.CharField(max_length=10, choices=JOB_CHOICE)
     amount = models.CharField(max_length=30, choices=AMOUNT_CHOICE)
@@ -65,18 +65,20 @@ class Magic(models.Model):
 
 class Weapon(models.Model):
     name = models.CharField(max_length=50)
-    cost = models.IntegerField()
+    cost = models.IntegerField('cost')
     others = models.CharField(max_length=800)
     job = models.CharField(max_length=10, choices=JOB_CHOICE)
     amount = models.CharField(max_length=30, choices=AMOUNT_CHOICE)
+    attact = models.IntegerField('attact')
+    times = models.IntegerField('times you can use')
 
 
 class Dk(models.Model):
     name = models.CharField(max_length=50)
-    cost = models.IntegerField()
+    cost = models.IntegerField('cost')
     others = models.CharField(max_length=800)
     job = models.CharField(max_length=10, choices=JOB_CHOICE)
     amount = models.CharField(max_length=30, choices=AMOUNT_CHOICE)
     ablity_name = models.CharField(max_length=50)
-    ablity_cost = models.IntegerField()
+    ablity_cost = models.IntegerField('ability cost')
     ablity = models.CharField(max_length=400)
