@@ -19,7 +19,7 @@ JOB_CHOICE = (
     (14, '衍生')
 )
 
-AMOUNT_CHOICE = (
+RARITY_CHOICE = (
     (1, '基本（无色）'),
     (2, '普通（白色）'),
     (3, '稀有（蓝色)'),
@@ -43,8 +43,8 @@ MINION_TYPE_CHOICE = (
 
 
 class Version(models.Model):
-    name = models.CharField(max_length=100)
-    pub_date = models.DateField('date published')
+    name = models.CharField('版本名字', max_length=100)
+    pub_date = models.DateField('发布日期')
 
     def __str__(self):
         return self.name
@@ -55,14 +55,14 @@ class Version(models.Model):
 
 class Minion(models.Model):
     name = models.CharField(max_length=50)
-    cost = models.IntegerField('cost')
+    cost = models.IntegerField()
     job = models.CharField(max_length=50, choices=JOB_CHOICE)
-    amount = models.CharField(max_length=30, choices=AMOUNT_CHOICE)
-    others = models.CharField(max_length=800)
-    attact = models.IntegerField('attact')
-    health = models.IntegerField('health')
+    rarity = models.CharField(max_length=30, choices=RARITY_CHOICE)
+    effect = models.CharField(max_length=800)
+    attact = models.IntegerField()
+    health = models.IntegerField()
     pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
-    explanation = models.CharField(max_length=800)
+    explanation = models.CharField(max_length=800, null=True)
 
     def __str__(self):
         return self.name
@@ -70,12 +70,12 @@ class Minion(models.Model):
 
 class Magic(models.Model):
     name = models.CharField(max_length=50)
-    cost = models.IntegerField('cost')
-    others = models.CharField(max_length=800)
+    cost = models.IntegerField()
+    effect = models.CharField(max_length=800)
     job = models.CharField(max_length=10, choices=JOB_CHOICE)
-    amount = models.CharField(max_length=30, choices=AMOUNT_CHOICE)
+    rarity = models.CharField(max_length=30, choices=RARITY_CHOICE)
     pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
-    explanation = models.CharField(max_length=800)
+    explanation = models.CharField(max_length=800, null=True)
 
     def __str__(self):
         return self.name
@@ -83,14 +83,14 @@ class Magic(models.Model):
 
 class Weapon(models.Model):
     name = models.CharField(max_length=50)
-    cost = models.IntegerField('cost')
-    others = models.CharField(max_length=800)
+    cost = models.IntegerField()
+    effect = models.CharField(max_length=800)
     job = models.CharField(max_length=10, choices=JOB_CHOICE)
-    amount = models.CharField(max_length=30, choices=AMOUNT_CHOICE)
-    attact = models.IntegerField('attact')
-    times = models.IntegerField('times you can use')
+    rarity = models.CharField(max_length=30, choices=RARITY_CHOICE)
+    attact = models.IntegerField()
+    durability = models.IntegerField(default=1)
     pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
-    explanation = models.CharField(max_length=800)
+    explanation = models.CharField(max_length=800, null=True)
 
     def __str__(self):
         return self.name
@@ -98,15 +98,15 @@ class Weapon(models.Model):
 
 class Dk(models.Model):
     name = models.CharField(max_length=50)
-    cost = models.IntegerField('cost')
-    others = models.CharField(max_length=800)
+    cost = models.IntegerField()
+    effect = models.CharField(max_length=800)
     job = models.CharField(max_length=10, choices=JOB_CHOICE)
-    amount = models.CharField(max_length=30, choices=AMOUNT_CHOICE)
+    rarity = models.CharField(max_length=30, choices=RARITY_CHOICE)
     ablity_name = models.CharField(max_length=50)
-    ablity_cost = models.IntegerField('ability cost')
+    ablity_cost = models.IntegerField()
     ablity = models.CharField(max_length=400)
     pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
-    explanation = models.CharField(max_length=800)
+    explanation = models.CharField(max_length=800, null=True)
 
     def __str__(self):
         return self.name
