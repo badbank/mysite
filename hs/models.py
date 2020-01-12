@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import timezone
+import datetime
 
 JOB_CHOICE = (
     (1, '法师'),
@@ -44,6 +46,12 @@ class Version(models.Model):
     name = models.CharField(max_length=100)
     pub_date = models.DateTimeField('date published')
 
+    def __str__(self):
+        return self.name
+
+    def is_normal(self):
+        return timezone.now() >= self.pub_date >= timezone.now() - datetime.timedelta(years=2)
+
 
 class Minion(models.Model):
     name = models.CharField(max_length=50)
@@ -55,6 +63,9 @@ class Minion(models.Model):
     health = models.IntegerField('health')
     pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name
+
 
 class Magic(models.Model):
     name = models.CharField(max_length=50)
@@ -63,6 +74,9 @@ class Magic(models.Model):
     job = models.CharField(max_length=10, choices=JOB_CHOICE)
     amount = models.CharField(max_length=30, choices=AMOUNT_CHOICE)
     pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
 
 
 class Weapon(models.Model):
@@ -75,6 +89,9 @@ class Weapon(models.Model):
     times = models.IntegerField('times you can use')
     pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name
+
 
 class Dk(models.Model):
     name = models.CharField(max_length=50)
@@ -86,3 +103,6 @@ class Dk(models.Model):
     ablity_cost = models.IntegerField('ability cost')
     ablity = models.CharField(max_length=400)
     pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
