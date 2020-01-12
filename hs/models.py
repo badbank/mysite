@@ -44,7 +44,7 @@ MINION_TYPE_CHOICE = (
 
 class Version(models.Model):
     name = models.CharField(max_length=100)
-    pub_date = models.DateTimeField('date published')
+    pub_date = models.DateField('date published')
 
     def __str__(self):
         return self.name
@@ -62,6 +62,7 @@ class Minion(models.Model):
     attact = models.IntegerField('attact')
     health = models.IntegerField('health')
     pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
+    explanation = models.CharField(max_length=800)
 
     def __str__(self):
         return self.name
@@ -74,6 +75,7 @@ class Magic(models.Model):
     job = models.CharField(max_length=10, choices=JOB_CHOICE)
     amount = models.CharField(max_length=30, choices=AMOUNT_CHOICE)
     pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
+    explanation = models.CharField(max_length=800)
 
     def __str__(self):
         return self.name
@@ -88,6 +90,7 @@ class Weapon(models.Model):
     attact = models.IntegerField('attact')
     times = models.IntegerField('times you can use')
     pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
+    explanation = models.CharField(max_length=800)
 
     def __str__(self):
         return self.name
@@ -103,6 +106,7 @@ class Dk(models.Model):
     ablity_cost = models.IntegerField('ability cost')
     ablity = models.CharField(max_length=400)
     pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
+    explanation = models.CharField(max_length=800)
 
     def __str__(self):
         return self.name
