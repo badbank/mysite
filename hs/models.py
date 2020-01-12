@@ -53,6 +53,7 @@ class Minion(models.Model):
     others = models.CharField(max_length=800)
     attact = models.IntegerField('attact')
     health = models.IntegerField('health')
+    pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
 
 
 class Magic(models.Model):
@@ -61,6 +62,7 @@ class Magic(models.Model):
     others = models.CharField(max_length=800)
     job = models.CharField(max_length=10, choices=JOB_CHOICE)
     amount = models.CharField(max_length=30, choices=AMOUNT_CHOICE)
+    pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
 
 
 class Weapon(models.Model):
@@ -71,6 +73,7 @@ class Weapon(models.Model):
     amount = models.CharField(max_length=30, choices=AMOUNT_CHOICE)
     attact = models.IntegerField('attact')
     times = models.IntegerField('times you can use')
+    pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
 
 
 class Dk(models.Model):
@@ -82,3 +85,4 @@ class Dk(models.Model):
     ablity_name = models.CharField(max_length=50)
     ablity_cost = models.IntegerField('ability cost')
     ablity = models.CharField(max_length=400)
+    pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
