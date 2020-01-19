@@ -43,8 +43,8 @@ MINION_TYPE_CHOICE = (
 
 
 class Version(models.Model):
-    name = models.CharField('版本名字', max_length=100)
-    pub_date = models.DateField('发布日期')
+    name = models.CharField(max_length=100)
+    pub_date = models.DateField()
 
     def __str__(self):
         return self.name
@@ -53,60 +53,38 @@ class Version(models.Model):
         return timezone.now() >= self.pub_date >= timezone.now() - datetime.timedelta(years=2)
 
 
-class Minion(models.Model):
+class Card(models.Model):
     name = models.CharField(max_length=50)
     cost = models.IntegerField()
-    job = models.CharField(max_length=50, choices=JOB_CHOICE)
-    rarity = models.CharField(max_length=30, choices=RARITY_CHOICE)
+    job = models.IntegerField(choices=JOB_CHOICE)
+    rarity = models.IntegerField(choices=RARITY_CHOICE)
     effect = models.CharField(max_length=800)
-    attact = models.IntegerField()
+    explanation = models.CharField(max_length=800, null=True)
+    pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        abstract = True
+
+
+class Minion(Card):
+    attack = models.IntegerField()
     health = models.IntegerField()
-    pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
-    explanation = models.CharField(max_length=800, null=True)
-
-    def __str__(self):
-        return self.name
+    type = models.IntegerField(choices=MINION_TYPE_CHOICE)
 
 
-class Magic(models.Model):
-    name = models.CharField(max_length=50)
-    cost = models.IntegerField()
-    effect = models.CharField(max_length=800)
-    job = models.CharField(max_length=10, choices=JOB_CHOICE)
-    rarity = models.CharField(max_length=30, choices=RARITY_CHOICE)
-    pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
-    explanation = models.CharField(max_length=800, null=True)
-
-    def __str__(self):
-        return self.name
+class Magic(Card):
+    pass
 
 
-class Weapon(models.Model):
-    name = models.CharField(max_length=50)
-    cost = models.IntegerField()
-    effect = models.CharField(max_length=800)
-    job = models.CharField(max_length=10, choices=JOB_CHOICE)
-    rarity = models.CharField(max_length=30, choices=RARITY_CHOICE)
-    attact = models.IntegerField()
+class Weapon(Card):
+    attack = models.IntegerField()
     durability = models.IntegerField(default=1)
-    pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
-    explanation = models.CharField(max_length=800, null=True)
-
-    def __str__(self):
-        return self.name
 
 
-class Dk(models.Model):
-    name = models.CharField(max_length=50)
-    cost = models.IntegerField()
-    effect = models.CharField(max_length=800)
-    job = models.CharField(max_length=10, choices=JOB_CHOICE)
-    rarity = models.CharField(max_length=30, choices=RARITY_CHOICE)
-    ablity_name = models.CharField(max_length=50)
-    ablity_cost = models.IntegerField()
-    ablity = models.CharField(max_length=400)
-    pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
-    explanation = models.CharField(max_length=800, null=True)
-
-    def __str__(self):
-        return self.name
+class Dk(Card):
+    skill_name = models.CharField(max_length=50)
+    skill_cost = models.IntegerField(null=True)
+    skill = models.CharField(max_length=400)
