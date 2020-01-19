@@ -1,19 +1,15 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from .models import Minion, Magic, Dk, Weapon, Version
+from .models import Card, Version
 
 
 def index(request):
-    all_minions = list(Minion.objects.all())
-    all_magics = list(Magic.objects.all())
-    all_dks = list(Dk.objects.all())
-    all_weapons = list(Weapon.objects.all())
-    all_cards = all_minions + all_magics + all_dks + all_weapons
+    all_cards = Card.all_cards()
     context = {
         'all_cards': all_cards
     }
     return render(request, 'hs/index.html', context)
 
 
-def detail(request, card_name):
-    return HttpResponse("You're looking at card '%s'." % card_name)
+def detail(request, real_type, real_id):
+    return HttpResponse("You're looking at %s, id %s." % (real_type, real_id))

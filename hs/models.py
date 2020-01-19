@@ -62,8 +62,21 @@ class Card(models.Model):
     explanation = models.CharField(max_length=800, null=True)
     pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
 
+    @property
+    def real_type(self):
+        return type(self).__name__
+
     def __str__(self):
         return self.name
+
+    @staticmethod
+    def all_cards():
+        all_minions = list(Minion.objects.all())
+        all_magics = list(Magic.objects.all())
+        all_dks = list(Dk.objects.all())
+        all_weapons = list(Weapon.objects.all())
+        all_cards = all_minions + all_magics + all_dks + all_weapons
+        return all_cards
 
     class Meta:
         abstract = True
