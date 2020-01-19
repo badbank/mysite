@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <title>炉石传说卡牌查询</title>
+</head>
+<body>
+<ul>
+    {% for card in all_cards %}
+        <li><a href="/hs/{{ card.id }}/">{{ card.name }}</a></li>
+    {% endfor %}
+</ul>
+</body>
+</html>
