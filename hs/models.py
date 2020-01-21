@@ -63,7 +63,7 @@ class Card(models.Model):
     pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
 
     @property
-    def real_type(self):
+    def real_type_name(self):
         return type(self).__name__
 
     def __str__(self):
