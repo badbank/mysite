@@ -16,7 +16,7 @@ def detail(request, real_type_name, real_id):
     card = get_object_or_404(real_type, pk=real_id)
     job_value = card.job
     rarity_value = card.rarity
-    pub_version_value = card.pub_version
+    card_pub_version = card.pub_version
     job = JOB_CHOICE.__getitem__(job_value - 1)[1]
     rarity = RARITY_CHOICE.__getitem__(rarity_value - 1)[1]
     cost = card.cost
@@ -28,6 +28,7 @@ def detail(request, real_type_name, real_id):
         'card_rarity': rarity,
         'card_cost': cost,
         'card_effect': effect,
-        'card_explanation': explanation
+        'card_explanation': explanation,
+        'card_pub_version': card_pub_version
     }
     return render(request, 'hs/detail.html', context)
