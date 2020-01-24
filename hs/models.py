@@ -99,5 +99,5 @@ class Weapon(Card):
 
 class Dk(Card):
     skill_name = models.CharField(max_length=50)
-    skill_cost = models.IntegerField(null=True)
+    skill_cost = models.IntegerField('技能费用（-1为被动英雄技能）', null=True)
     skill = models.CharField(max_length=400)

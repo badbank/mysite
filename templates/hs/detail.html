@@ -14,9 +14,23 @@
     <br/>
     <li>职业：{{ card_job }}</li>
     <li>稀有度：{{ card_rarity }}</li>
+    <li>类型：{{ card_type }}</li>
     <li>费用：{{ card_cost }}</li>
+    {% if card_real_type == 'Minion' %}
+        <li>攻击力：{{ minion_attack }}</li>
+        <li>生命值：{{ minion_health }}</li>
+        <li>种类：{{ minion_type }}</li>
+    {% endif %}
+    {% if card_real_type == 'Weapon' %}
+        <li>攻击力：{{ weapon_attack }}</li>
+        <li>耐久度：{{ weapon_durability }}</li>
+    {% endif %}
     <li>效果：</li>
     <li>{{ card_effect }}</li>
+    {% if card_real_type == 'Dk' %}
+        <li>英雄技能：{{ dk_skill_cost }}费 {{ dk_skill_name }}：</li>
+        <li>{{ dk_skill }}</li>
+    {% endif %}
     <li>卡牌背景描述：</li>
     <li>{{ card_explanation }}</li>
     <li>所属版本：{{ card_pub_version }}</li>
