@@ -49,6 +49,12 @@ class Version(models.Model):
     def __str__(self):
         return self.name
 
+    def is_normal(self):
+        if timezone.localdate() >= self.pub_date >= timezone.localdate() - datetime.timedelta(days=730):
+            return '标准'
+        else:
+            return '狂野'
+
 
 class Card(models.Model):
     name = models.CharField(max_length=50)
