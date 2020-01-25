@@ -49,9 +49,6 @@ class Version(models.Model):
     def __str__(self):
         return self.name
 
-    def is_normal(self):
-        return timezone.now() >= self.pub_date >= timezone.now() - datetime.timedelta(years=2)
-
 
 class Card(models.Model):
     name = models.CharField(max_length=50)
@@ -80,6 +77,12 @@ class Card(models.Model):
 
     class Meta:
         abstract = True
+
+    def is_normal(self):
+        if timezone.localdate() >= self.pub_version.pub_date >= timezone.localdate() - datetime.timedelta(days=730):
+            return '标准'
+        else:
+            return '狂野'
 
 
 class Minion(Card):

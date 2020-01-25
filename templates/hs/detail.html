@@ -2,9 +2,7 @@
 <html lang="ch">
 <head>
     <meta charset="UTF-8">
-    <title>
-        {{ card_name }}
-    </title>
+    <title>{{ card_name }}</title>
 </head>
 <body>
 <ul>
@@ -33,7 +31,7 @@
     {% endif %}
     <li>卡牌背景描述：</li>
     <li>{{ card_explanation }}</li>
-    <li>所属版本：{{ card_pub_version }}</li>
+    <li>所属版本：{{ card_pub_version }}({{ card_is_normal }}卡牌)</li>
 </ul>
 </body>
 </html>

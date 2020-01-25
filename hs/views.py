@@ -60,7 +60,8 @@ def detail(request, real_type_name, real_id):
         'card_effect': effect,
         'card_explanation': explanation,
         'card_pub_version': card_pub_version,
-        'card_real_type': real_type_name
+        'card_real_type': real_type_name,
+        'card_is_normal': card.is_normal()
     }
     context = {**context_of_all, **context_of_single_type}
     return render(request, 'hs/detail.html', context)
