@@ -69,6 +69,21 @@ class Card(models.Model):
     def real_type_name(self):
         return type(self).__name__
 
+    @property
+    def real_rarity_name(self):
+        if self.rarity == 1:
+            return 'basic'
+        elif self.rarity == 2:
+            return 'normal'
+        elif self.rarity == 3:
+            return 'rare'
+        elif self.rarity == 4:
+            return 'epic'
+        elif self.rarity == 5:
+            return 'legendary'
+        else:
+            return 'derived'
+
     def __str__(self):
         return self.name
 

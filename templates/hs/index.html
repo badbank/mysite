@@ -10,9 +10,11 @@
     <title>炉石传说卡牌查询</title>
 </head>
 <body>
+<img src="{% static 'hs/images/background.gif' %}">
 <ul>
     {% for card in all_cards %}
-        <li><a href="/hs/{{ card.real_type_name }}/{{ card.id }}/">{{ card.name }}</a></li>
+        <li><a class="{{ card.real_rarity_name }}"
+               href="/hs/{{ card.real_type_name }}/{{ card.id }}/">{{ card.name }}</a></li>
     {% endfor %}
 </ul>
 </body>

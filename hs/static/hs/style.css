@@ -1,7 +1,27 @@
-li a {
+.basic {
+    color: gray;
+}
+
+.normal {
+    color: white;
+}
+
+.rare {
     color: blue;
 }
 
+.epic {
+    color: purple;
+}
+
+.legendary {
+    color: orange;
+}
+
+.derived {
+    color: black;
+}
+
 body {
-    background: brown;
+    background: yellow;
 }
