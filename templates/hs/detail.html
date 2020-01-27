@@ -12,30 +12,76 @@
 <body>
 <h1><a href='/hs/'>{{ card_name }}</a></h1>
 <br/>
-<img src="{% static image_location %}">
-<ul>
-    <li>职业：{{ card_job }}</li>
-    <li>稀有度：{{ card_rarity }}</li>
-    <li>类型：{{ card_type }}</li>
-    <li>费用：{{ card_cost }}</li>
+<img src="{% static image_location %}" alt={{ card_name }}>
+<table>
+    <tr>
+        <th colspan="2">详细信息</th>
+    </tr>
+    <tr>
+        <td class="l">职业：</td>
+        <td class="r">{{ card_job }}</td>
+    </tr>
+    <tr>
+        <td class="l">稀有度：</td>
+        <td class="r">{{ card_rarity }}</td>
+    </tr>
+    <tr>
+        <td class="l">类型：</td>
+        <td class="r">{{ card_type }}</td>
+    </tr>
+    <tr>
+        <td class="l">费用：</td>
+        <td class="r">{{ card_cost }}</td>
+    </tr>
     {% if card_real_type == 'Minion' %}
-        <li>攻击力：{{ minion_attack }}</li>
-        <li>生命值：{{ minion_health }}</li>
-        <li>种类：{{ minion_type }}</li>
+        <tr>
+            <td class="l">攻击力：</td>
+            <td class="r">{{ minion_attack }}</td>
+        </tr>
+        <tr>
+            <td class="l">生命值：</td>
+            <td class="r">{{ minion_health }}</td>
+        </tr>
+        <tr>
+            <td class="l">种类：</td>
+            <td class="r">{{ minion_type }}</td>
+        </tr>
     {% endif %}
     {% if card_real_type == 'Weapon' %}
-        <li>攻击力：{{ weapon_attack }}</li>
-        <li>耐久度：{{ weapon_durability }}</li>
+        <tr>
+            <td class="l">攻击力：</td>
+            <td class="r">{{ weapon_attack }}</td>
+        </tr>
+        <tr>
+            <td class="l">耐久度：</td>
+            <td class="r">{{ weapon_durability }}</td>
+        </tr>
     {% endif %}
-    <li>效果：
-        <p>{{ card_effect }}</p></li>
+    <tr>
+        <td class="l">效果：</td>
+        <td class="r">{{ card_effect }}</td>
+    </tr>
     {% if card_real_type == 'Dk' %}
-        <li>英雄技能：{{ dk_skill_cost }}费 {{ dk_skill_name }}：</li>
-        <li>{{ dk_skill }}</li>
+        <tr>
+            <td class="l">英雄技能费用：</td>
+            <td class="r">{{ dk_skill_cost }}</td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="l">英雄技能：</td>
+            <th class="r">{{ dk_skill_name }}</th>
+        </tr>
+        <tr>
+            <td class="r">{{ dk_skill }}</td>
+        </tr>
     {% endif %}
-    <li>卡牌背景描述：
-        <p>{{ card_explanation }}</p></li>
-    <li>所属版本：{{ card_pub_version }}({{ card_is_normal }}卡牌)</li>
-</ul>
+    <tr>
+        <td class="l">卡牌背景描述：</td>
+        <td class="r">{{ card_explanation }}</td>
+    </tr>
+    <tr>
+        <td class="l">所属版本：</td>
+        <td class="r">{{ card_pub_version }}({{ card_is_normal }}卡牌)</td>
+    </tr>
+</table>
 </body>
 </html>

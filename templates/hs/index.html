@@ -11,7 +11,7 @@
 </head>
 <body>
 <h1>炉石传说卡牌查询</h1>
-<img src="{% static 'hs/images/background.gif' %}">
+<img src="{% static 'hs/images/background.gif' %}" alt="炉石logo">
 <ul>
     {% for card in all_cards %}
         <li><a class="{{ card.real_rarity_name }}"
