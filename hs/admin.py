@@ -70,9 +70,20 @@ class VersionAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 
+class SkillAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+        'cost',
+        'effect',
+        'job'
+    )
+    list_filter = ['cost', 'job']
+    search_fields = ['name']
+
+
 admin.site.register(Minion, MinionAdmin)
 admin.site.register(Magic, MagicAdmin)
 admin.site.register(Dk, DkAdmin)
 admin.site.register(Weapon, WeaponAdmin)
 admin.site.register(Version, VersionAdmin)
-admin.site.register(Skill)
+admin.site.register(Skill, SkillAdmin)
