@@ -2,6 +2,9 @@ h1 {
     color: brown;
     font-size: 40px;
     text-align: center;
+    margin: 0;
+    padding: 20px;
+    text-shadow: 2px 2px 1px gray;
 }
 
 .basic {
@@ -29,14 +32,38 @@ h1 {
 }
 
 body {
-    background: gold;
+    background-color: gold;
+    width: 850px;
+    margin: 0 auto;
+    padding: 10px 20px 30px 20px;
+    border: 5px solid red;
+
 }
 
-li, p {
-    width: 1850px;
-    font-family: "Microsoft Himalaya";
-    font-size: 20px;
+p {
+    width: 800px;
+    font-size: 30px;
     line-height: 30px;
     letter-spacing: 1px;
     text-align: center;
+    text-shadow: 1px 1px 1px lightyellow;
+}
+
+li {
+    list-style-type: none;
+    width: 800px;
+    font-size: 30px;
+    line-height: 30px;
+    letter-spacing: 1px;
+    text-align: center;
+    text-shadow: 1px 1px 1px lightyellow;
+}
+
+img {
+    display: block;
+    margin: 0 auto;
+}
+
+html {
+    background-color: darkgray;
 }

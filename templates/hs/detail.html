@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="ch">
 <head>
+
     {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'hs/style.css' %}">
+
     <meta charset="UTF-8">
     <title>{{ card_name }}</title>
 </head>
 <body>
-<h1>{{ card_name }}</h1>
+<h1><a href='/hs/'>{{ card_name }}</a></h1>
 <br/>
 <img src="{% static image_location %}">
 <ul>
