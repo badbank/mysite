@@ -132,3 +132,6 @@ class Skill(models.Model):
     cost = models.IntegerField()
     job = models.IntegerField(choices=JOB_CHOICE)
     effect = models.CharField(max_length=800)
+
+    def __str__(self):
+        return self.name
