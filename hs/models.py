@@ -129,7 +129,7 @@ class Dk(Card):
 
 class Skill(models.Model):
     name = models.CharField(max_length=50)
-    cost = models.IntegerField()
+    cost = models.IntegerField('技能费用（-1为被动英雄技能）')
     job = models.IntegerField(choices=JOB_CHOICE)
     effect = models.CharField(max_length=800)
 
