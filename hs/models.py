@@ -125,3 +125,10 @@ class Dk(Card):
     skill_name = models.CharField(max_length=50)
     skill_cost = models.IntegerField('技能费用（-1为被动英雄技能）', null=True)
     skill = models.CharField(max_length=400)
+
+
+class Skill(models.Model):
+    name = models.CharField(max_length=50)
+    cost = models.IntegerField()
+    job = models.IntegerField(choices=JOB_CHOICE)
+    effect = models.CharField(max_length=800)

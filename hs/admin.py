@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Magic, Minion, Dk, Weapon, Version, Card
+from .models import Magic, Minion, Dk, Weapon, Version, Skill
 
 
 class MinionAdmin(admin.ModelAdmin):
@@ -75,3 +75,4 @@ admin.site.register(Magic, MagicAdmin)
 admin.site.register(Dk, DkAdmin)
 admin.site.register(Weapon, WeaponAdmin)
 admin.site.register(Version, VersionAdmin)
+admin.site.register(Skill)
