@@ -93,7 +93,8 @@ class Card(models.Model):
         all_magics = list(Magic.objects.all())
         all_dks = list(Dk.objects.all())
         all_weapons = list(Weapon.objects.all())
-        all_cards = all_minions + all_magics + all_dks + all_weapons
+        all_skills = list(Skill.objects.all())
+        all_cards = all_minions + all_magics + all_dks + all_weapons + all_skills
         return all_cards
 
     class Meta:
@@ -132,6 +133,11 @@ class Skill(models.Model):
     cost = models.IntegerField('技能费用（-1为被动英雄技能）')
     job = models.IntegerField(choices=JOB_CHOICE)
     effect = models.CharField(max_length=800)
+    rarity = (6, '衍生')
 
     def __str__(self):
         return self.name
+
+    @property
+    def real_type_name(self):
+        return type(self).__name__
