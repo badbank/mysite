@@ -22,6 +22,7 @@ def detail(request, real_type_name, real_id):
     cost = card.cost
     effect = card.effect
     explanation = card.explanation
+    image_location = 'hs/images/' + real_type_name + str(real_id) + '.png'
     if real_type_name == 'Minion':
         type_name = '随从'
         type_value = card.type
@@ -52,6 +53,8 @@ def detail(request, real_type_name, real_id):
             'dk_skill': card.skill
         }
     context_of_all = {
+        'image_location': image_location,
+        'card_id': real_id,
         'card_name': card.name,
         'card_job': job,
         'card_rarity': rarity,

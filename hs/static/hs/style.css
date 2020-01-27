@@ -1,3 +1,9 @@
+h1 {
+    color: brown;
+    font-size: 40px;
+    text-align: center;
+}
+
 .basic {
     color: gray;
 }
@@ -15,7 +21,7 @@
 }
 
 .legendary {
-    color: orange;
+    color: darkorange;
 }
 
 .derived {
@@ -23,5 +29,14 @@
 }
 
 body {
-    background: yellow;
+    background: gold;
+}
+
+li, p {
+    width: 1850px;
+    font-family: "Microsoft Himalaya";
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: 1px;
+    text-align: center;
 }

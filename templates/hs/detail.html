@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="ch">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <title>{{ card_name }}</title>
 </head>
 <body>
+<h1>{{ card_name }}</h1>
+<br/>
+<img src="{% static image_location %}">
 <ul>
-    <li>你正在查看“{{ card_name }}”。</li>
-    <br/>
-    <li>{{ card_name }}</li>
-    <br/>
     <li>职业：{{ card_job }}</li>
     <li>稀有度：{{ card_rarity }}</li>
     <li>类型：{{ card_type }}</li>
