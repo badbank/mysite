@@ -41,7 +41,7 @@ h2 {
 }
 
 body {
-    background-color: #303030;
+    background-color: gold;
     width: 850px;
     margin: 0 auto;
     padding: 10px 20px 30px 20px;
@@ -92,16 +92,16 @@ th {
     text-align: left;
 }
 
-#hyperlink {
-    color: azure;
+a {
+    color: black;
 }
 
 html {
-    background-color: darkgrey;
+    background: url("/static/hs/images/background.gif") no-repeat, url("/static/hs/images/bg2.jpg");
     font-family: "Microsoft YaHei UI";
 }
 
 footer {
-    color: azure;
+    color: black;
     text-align: right;
 }
