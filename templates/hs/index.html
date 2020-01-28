@@ -10,13 +10,22 @@
     <title>炉石传说卡牌查询</title>
 </head>
 <body>
-<h1>炉石传说卡牌查询</h1>
-<img src="{% static 'hs/images/background.gif' %}" alt="炉石logo">
-<ul>
-    {% for card in all_cards %}
-        <li><a class="{{ card.real_rarity_name }}"
-               href="/hs/{{ card.real_type_name }}/{{ card.id }}/">{{ card.name }}</a></li>
-    {% endfor %}
-</ul>
+<main>
+    <h1>炉石传说卡牌查询</h1>
+    <a href="https://hs.blizzard.cn/home" title="炉石官网"><img src="{% static 'hs/images/background.gif' %}" alt="炉石logo"></a>
+    <ul>
+        {% for card in all_cards %}
+            <li><a class="{{ card.real_rarity_name }}"
+                   href="/hs/{{ card.real_type_name }}/{{ card.id }}/">{{ card.name }}</a></li>
+        {% endfor %}
+    </ul>
+</main>
+<footer>
+    <p>
+    <pre><strong>暴雪娱乐<em>《炉石传说》</em>  Blizzard Entertainment <em>Hearthstone</em></strong>
+    <em>lalala222制作</em>
+    更多信息详见<a href="https://hs.blizzard.cn/cards/" title="官方卡牌查询器">官方资源</a></pre>
+    </p>
+</footer>
 </body>
 </html>

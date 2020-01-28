@@ -85,4 +85,9 @@ th {
 
 html {
     background-color: darkgray;
+    font-family: "Microsoft YaHei UI";
+}
+
+footer {
+    text-align: right;
 }
