@@ -1,12 +1,20 @@
 from django.shortcuts import render, get_object_or_404
 from pydoc import locate
-from .models import Card, Version, JOB_CHOICE, RARITY_CHOICE, MINION_TYPE_CHOICE
+from .models import Card, Minion, Magic, Weapon, Dk, Skill, JOB_CHOICE, RARITY_CHOICE, MINION_TYPE_CHOICE
 
 
 def index(request):
-    all_cards = Card.all_cards()
+    all_minions = Minion.objects.all()
+    all_magics = Magic.objects.all()
+    all_weapons = Weapon.objects.all()
+    all_dks = Dk.objects.all()
+    all_skills = Skill.objects.all()
     context = {
-        'all_cards': all_cards
+        'all_minions': all_minions,
+        'all_magics': all_magics,
+        'all_weapons': all_weapons,
+        'all_dks': all_dks,
+        'all_skills': all_skills
     }
     return render(request, 'hs/index.html', context)
 

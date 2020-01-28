@@ -1,6 +1,15 @@
 h1 {
     color: brown;
-    font-size: 40px;
+    font-size: 45px;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+    text-shadow: 2px 2px 1px gray;
+}
+
+h2 {
+    color: brown;
+    font-size: 35px;
     text-align: center;
     margin: 0;
     padding: 20px;
@@ -32,7 +41,7 @@ h1 {
 }
 
 body {
-    background-color: gold;
+    background-color: #303030;
     width: 850px;
     margin: 0 auto;
     padding: 10px 20px 30px 20px;
@@ -50,12 +59,12 @@ p {
 
 li {
     list-style-type: none;
-    width: 800px;
+    width: 768px;
     font-size: 30px;
     line-height: 45px;
     letter-spacing: 1px;
     text-align: center;
-    text-shadow: 1px 1px 1px lightyellow;
+    text-shadow: 1px 1px 1px white;
 }
 
 img {
@@ -83,11 +92,16 @@ th {
     text-align: left;
 }
 
+#hyperlink {
+    color: azure;
+}
+
 html {
-    background-color: darkgray;
+    background-color: darkgrey;
     font-family: "Microsoft YaHei UI";
 }
 
 footer {
+    color: azure;
     text-align: right;
 }

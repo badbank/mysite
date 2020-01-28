@@ -10,15 +10,52 @@
     <title>炉石传说卡牌查询</title>
 </head>
 <body>
-<main>
+<header>
     <h1>炉石传说卡牌查询</h1>
     <a href="https://hs.blizzard.cn/home" title="炉石官网"><img src="{% static 'hs/images/background.gif' %}" alt="炉石logo"></a>
+</header>
+<main>
+    <hr/>
+    <h2>随从</h2>
     <ul>
-        {% for card in all_cards %}
+        {% for card in all_minions %}
             <li><a class="{{ card.real_rarity_name }}"
-                   href="/hs/{{ card.real_type_name }}/{{ card.id }}/">{{ card.name }}</a></li>
+                   href="/hs/Minion/{{ card.id }}/">{{ card.name }}</a></li>
         {% endfor %}
     </ul>
+    <hr/>
+    <h2>法术</h2>
+    <ul>
+        {% for card in all_magics %}
+            <li><a class="{{ card.real_rarity_name }}"
+                   href="/hs/Magic/{{ card.id }}/">{{ card.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <hr/>
+    <h2>武器</h2>
+    <ul>
+        {% for card in all_weapons %}
+            <li><a class="{{ card.real_rarity_name }}"
+                   href="/hs/Weapon/{{ card.id }}/">{{ card.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <hr/>
+    <h2>英雄</h2>
+    <ul>
+        {% for card in all_dks %}
+            <li><a class="{{ card.real_rarity_name }}"
+                   href="/hs/Dk/{{ card.id }}/">{{ card.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <hr/>
+    <h2>英雄技能</h2>
+    <ul>
+        {% for card in all_skills %}
+            <li><a class="{{ card.real_rarity_name }}"
+                   href="/hs/Skill/{{ card.id }}/">{{ card.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <hr/>
 </main>
 <footer>
     <p>
