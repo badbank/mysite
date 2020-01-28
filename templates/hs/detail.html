@@ -69,7 +69,7 @@
             </tr>
             <tr>
                 <td rowspan="2" class="l">英雄技能：</td>
-                <th class="r">{{ dk_skill_name }}</th>
+                <th class="r"><a href="/hs/Skill/{{ card_id }}">{{ dk_skill_name }}</a></th>
             </tr>
             <tr>
                 <td class="r">{{ dk_skill }}</td>
@@ -85,5 +85,8 @@
         </tr>
     {% endif %}
 </table>
+{% if card_real_type == 'Skill' %}
+    <p><a href="/hs/Dk/{{ card_id }}">对应卡牌</a></p>
+{% endif %}
 </body>
 </html>
