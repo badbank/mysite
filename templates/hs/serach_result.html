@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ch">
+<head>
+
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'hs/style.css' %}">
+
+    <meta charset="UTF-8">
+    <title>炉石传说卡牌查询--查询结果</title>
+</head>
+<body>
+<header>
+    <h1>“{{ card_name_part }}”的查询结果</h1>
+    <a href="https://hs.blizzard.cn/home" title="炉石官网"><img src="{% static 'hs/images/logo.png' %}" alt="炉石logo"></a>
+    <nav>
+        <form method="get">
+            <input type="search" name="card_name_part" placeholder="查找卡牌">
+            <input type="submit" value="搜索">
+        </form>
+    </nav>
+</header>
+<main>
+    <hr/>
+    {% if not all_cards %}
+        <p>没有找到包含“{{ card_name_part }}”的卡牌。</p>
+    {% endif %}
+    <ul>
+        {% for card in all_cards %}
+            <li><a class="{{ card.real_rarity_name }}"
+                   href="/hs/{{ card.real_type_name }}/{{ card.id }}/">{{ card.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="/hs/">返回主页</a>
+    <hr/>
+</main>
+<footer>
+    <p>
+    <pre><strong>暴雪娱乐<em>《炉石传说》</em>  Blizzard Entertainment <em>Hearthstone</em></strong>
+    <em>lalala222制作</em>
+    更多信息详见<a href="https://hs.blizzard.cn/cards/" title="官方卡牌查询器">官方资源</a></pre>
+    </p>
+</footer>
+</body>
+</html>

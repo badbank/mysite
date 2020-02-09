@@ -9,7 +9,11 @@ def search(request):
     for card in Card.all_cards():
         if card_name_part in card.name:
             card_list.append(card)
-    return render(request, 'hs/index.html', {'all_minions': card_list})
+    context = {
+        'all_cards': card_list,
+        'card_name_part': card_name_part
+    }
+    return render(request, 'hs/serach_result.html', context)
 
 
 def index(request):
