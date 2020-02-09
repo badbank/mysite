@@ -3,6 +3,15 @@ from pydoc import locate
 from .models import Card, Minion, Magic, Weapon, Dk, Skill, JOB_CHOICE, RARITY_CHOICE, MINION_TYPE_CHOICE
 
 
+def search(request):
+    card_name_part = request.GET.get('card_name_part')
+    card_list = []
+    for card in Card.all_cards():
+        if card_name_part in card.name:
+            card_list.append(card)
+    return render(request, 'hs/index.html', {'all_minions': card_list})
+
+
 def index(request):
     all_minions = Minion.objects.all()
     all_magics = Magic.objects.all()
