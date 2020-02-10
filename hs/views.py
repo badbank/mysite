@@ -32,6 +32,26 @@ def index(request):
     return render(request, 'hs/index.html', context)
 
 
+def typedetail(request, real_type_name):
+    real_type = locate('hs.models.' + real_type_name)
+    all_cards = real_type.objects.all()
+    if real_type_name == 'Minion':
+        type_name = '随从'
+    elif real_type_name == 'Magic':
+        type_name = '法术'
+    elif real_type_name == 'Weapon':
+        type_name = '武器'
+    elif real_type_name == 'Dk':
+        type_name = '英雄'
+    else:
+        type_name = '英雄技能'
+    context = {
+        'card_type': type_name,
+        'all_cards': all_cards
+    }
+    return render(request, 'hs/typedetail.html', context)
+
+
 def detail(request, real_type_name, real_id):
     real_type = locate('hs.models.' + real_type_name)
     card = get_object_or_404(real_type, pk=real_id)

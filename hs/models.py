@@ -135,6 +135,10 @@ class Skill(models.Model):
     effect = models.CharField(max_length=800)
     rarity = (6, '衍生')
 
+    @property
+    def real_rarity_name(self):
+        return 'derived'
+
     def __str__(self):
         return self.name
 
