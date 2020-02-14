@@ -14,7 +14,7 @@
     <h1>炉石传说卡牌查询</h1>
     <nav>
         <a href="/hs/">返回首页</a>
-        <form method="get" action="search/">
+        <form method="get" action="../search/">
             <input type="search" name="card_name_part" placeholder="查找卡牌">
             <input type="submit" value="搜索">
         </form>
@@ -27,9 +27,22 @@
     <ul>
         {% for card in all_cards %}
             <li><a class="{{ card.real_rarity_name }}"
-                   href="/hs/{{ card_type }}/{{ card.id }}/">{{ card.name }}</a></li>
+                   href="/hs/{{ card.real_type_name }}/{{ card.id }}/">{{ card.name }}</a></li>
         {% endfor %}
     </ul>
+    <aside>
+        <h3>排列顺序</h3>
+        <form action="order/" method="post">
+            {% csrf_token %}
+            <input type="radio" name="ordered_by" id="1" value="cost">
+            <label for="1">按费用</label><br>
+            <input type="radio" name="ordered_by" id="2" value="rarity">
+            <label for="2">按稀有度</label><br>
+            <input type="radio" name="ordered_by" id="3" value="job">
+            <label for="3">按职业</label><br>
+            <input type="submit" value="排序">
+        </form>
+    </aside>
 </main>
 <footer>
     <p>

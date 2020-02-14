@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from pydoc import locate
 from .models import Card, Minion, Magic, Weapon, Dk, Skill, JOB_CHOICE, RARITY_CHOICE, MINION_TYPE_CHOICE
+from urllib.parse import urlencode
 
 
 def search(request):
@@ -13,7 +14,38 @@ def search(request):
         'all_cards': card_list,
         'card_name_part': card_name_part
     }
-    return render(request, 'hs/serach_result.html', context)
+    return render(request, 'hs/search_result.html', context)
+
+
+def order(request, real_type_name):
+    real_type = locate('hs.models.' + real_type_name)
+    unordered_all_cards = real_type.objects.all()
+    order_by = request.POST.get('ordered_by')
+    ordering_dict = {}
+    ordered_all_cards = []
+    if order_by == 'cost':
+        for card in unordered_all_cards:
+            ordering_dict[str(card.id)] = card.cost
+        ordering_dict = sorted(ordering_dict.items(), key=lambda item: item[1])
+        for card in ordering_dict:
+            ordered_all_cards.append(card[0])
+    elif order_by == 'rarity':
+        for card in unordered_all_cards:
+            ordering_dict[str(card.id)] = card.rarity
+        ordering_dict = sorted(ordering_dict.items(), key=lambda item: item[1])
+        for card in ordering_dict:
+            ordered_all_cards.append(card[0])
+    elif order_by == 'job':
+        for card in unordered_all_cards:
+            ordering_dict[str(card.id)] = card.job
+        ordering_dict = sorted(ordering_dict.items(), key=lambda item: item[1])
+        for card in ordering_dict:
+            ordered_all_cards.append(card[0])
+    ordered_all_cards_str = ' '.join(ordered_all_cards)
+    base_url = '../'
+    query_string = urlencode({'ordered_all_cards': ordered_all_cards_str})
+    url = '{}?{}'.format(base_url, query_string)
+    return redirect(url, real_type_name=real_type_name)
 
 
 def index(request):
@@ -33,8 +65,17 @@ def index(request):
 
 
 def typedetail(request, real_type_name):
+    ordered_all_cards_str = request.GET.get('ordered_all_cards')
     real_type = locate('hs.models.' + real_type_name)
-    all_cards = real_type.objects.all()
+    if not ordered_all_cards_str:
+        all_cards = real_type.objects.all()
+    else:
+        ordered_all_cards = ordered_all_cards_str.split()
+        all_cards = []
+        for card in ordered_all_cards:
+            real_id = int(card)
+            real_card = get_object_or_404(real_type, pk=real_id)
+            all_cards.append(real_card)
     if real_type_name == 'Minion':
         type_name = '随从'
     elif real_type_name == 'Magic':
