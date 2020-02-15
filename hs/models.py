@@ -134,6 +134,7 @@ class Skill(models.Model):
     job = models.IntegerField(choices=JOB_CHOICE)
     effect = models.CharField(max_length=800)
     rarity = (6, '衍生')
+    pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
 
     @property
     def real_rarity_name(self):

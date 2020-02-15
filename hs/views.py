@@ -41,6 +41,12 @@ def order(request, real_type_name):
         ordering_dict = sorted(ordering_dict.items(), key=lambda item: item[1])
         for card in ordering_dict:
             ordered_all_cards.append(card[0])
+    elif order_by == 'version':
+        for card in unordered_all_cards:
+            ordering_dict[str(card.id)] = card.pub_version.id
+        ordering_dict = sorted(ordering_dict.items(), key=lambda item: item[1])
+        for card in ordering_dict:
+            ordered_all_cards.append(card[0])
     ordered_all_cards_str = ' '.join(ordered_all_cards)
     base_url = '../'
     query_string = urlencode({'ordered_all_cards': ordered_all_cards_str})
