@@ -45,6 +45,7 @@ MINION_TYPE_CHOICE = (
 class Version(models.Model):
     name = models.CharField(max_length=100)
     pub_date = models.DateField()
+    ordering = models.IntegerField()
 
     def __str__(self):
         return self.name
