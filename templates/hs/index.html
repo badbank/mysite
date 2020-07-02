@@ -46,11 +46,11 @@
         {% endfor %}
     </ul>
     <hr/>
-    <h2><a href="/hs/Dk/">英雄</a></h2>
+    <h2><a href="/hs/Hero/">英雄</a></h2>
     <ul>
-        {% for card in all_dks %}
+        {% for card in all_heroes %}
             <li><a class="{{ card.real_rarity_name }}"
-                   href="/hs/Dk/{{ card.id }}/">{{ card.name }}</a></li>
+                   href="/hs/Hero/{{ card.id }}/">{{ card.name }}</a></li>
         {% endfor %}
     </ul>
     <hr/>

@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from pydoc import locate
-from .models import Card, Minion, Magic, Weapon, Dk, Skill, JOB_CHOICE, RARITY_CHOICE, MINION_TYPE_CHOICE
+from .models import Card, Minion, Magic, Weapon, Hero, Skill, JOB_CHOICE, RARITY_CHOICE, MINION_TYPE_CHOICE
 from urllib.parse import urlencode
 
 
@@ -58,13 +58,13 @@ def index(request):
     all_minions = Minion.objects.all()
     all_magics = Magic.objects.all()
     all_weapons = Weapon.objects.all()
-    all_dks = Dk.objects.all()
+    all_heroes = Hero.objects.all()
     all_skills = Skill.objects.all()
     context = {
         'all_minions': all_minions,
         'all_magics': all_magics,
         'all_weapons': all_weapons,
-        'all_dks': all_dks,
+        'all_heroes': all_heroes,
         'all_skills': all_skills
     }
     return render(request, 'hs/index.html', context)
@@ -88,7 +88,7 @@ def typedetail(request, real_type_name):
         type_name = '法术'
     elif real_type_name == 'Weapon':
         type_name = '武器'
-    elif real_type_name == 'Dk':
+    elif real_type_name == 'Hero':
         type_name = '英雄'
     else:
         type_name = '英雄技能'
@@ -133,13 +133,13 @@ def detail(request, real_type_name, real_id):
         else:
             type_name = '英雄'
             if card.skill_cost == -1:
-                dk_skill_cost = '被动'
+                hero_skill_cost = '被动'
             else:
-                dk_skill_cost = card.skill_cost
+                hero_skill_cost = card.skill_cost
             context_of_single_type = {
-                'dk_skill_cost': dk_skill_cost,
-                'dk_skill_name': card.skill_name,
-                'dk_skill': card.skill
+                'hero_skill_cost': hero_skill_cost,
+                'hero_skill_name': card.skill_name,
+                'hero_skill': card.skill
             }
         context_of_all = {
             'image_location': image_location,

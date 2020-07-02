@@ -66,17 +66,17 @@
                     <td class="r">{{ weapon_durability }}</td>
                 </tr>
             {% endif %}
-            {% if card_real_type == 'Dk' %}
+            {% if card_real_type == 'Hero' %}
                 <tr>
                     <td class="l">英雄技能费用：</td>
-                    <td class="r">{{ dk_skill_cost }}</td>
+                    <td class="r">{{ hero_skill_cost }}</td>
                 </tr>
                 <tr>
                     <td rowspan="2" class="l">英雄技能：</td>
-                    <th class="r"><a href="/hs/Skill/{{ card_id }}"><em>{{ dk_skill_name }}</em></a></th>
+                    <th class="r"><a href="/hs/Skill/{{ card_id }}"><em>{{ hero_skill_name }}</em></a></th>
                 </tr>
                 <tr>
-                    <td class="r">{{ dk_skill }}</td>
+                    <td class="r">{{ hero_skill }}</td>
                 </tr>
             {% endif %}
             <tr>
@@ -90,7 +90,7 @@
         {% endif %}
     </table>
     {% if card_real_type == 'Skill' %}
-        <p><a href="/hs/Dk/{{ card_id }}"><em>对应卡牌</em></a></p>
+        <p><a href="/hs/Hero/{{ card_id }}"><em>对应卡牌</em></a></p>
     {% endif %}
 </main>
 

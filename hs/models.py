@@ -16,7 +16,8 @@ JOB_CHOICE = (
     (11, '暗金教（法师、牧师、术士）'),
     (12, '青莲帮（萨满祭司、德鲁伊、潜行者）'),
     (13, '中立'),
-    (14, '衍生')
+    (14, '衍生'),
+    (15, '恶魔猎手')
 )
 
 RARITY_CHOICE = (
@@ -92,7 +93,7 @@ class Card(models.Model):
     def all_cards():
         all_minions = list(Minion.objects.all())
         all_magics = list(Magic.objects.all())
-        all_dks = list(Dk.objects.all())
+        all_dks = list(Hero.objects.all())
         all_weapons = list(Weapon.objects.all())
         all_skills = list(Skill.objects.all())
         all_cards = all_minions + all_magics + all_dks + all_weapons + all_skills
@@ -123,7 +124,7 @@ class Weapon(Card):
     durability = models.IntegerField(default=1)
 
 
-class Dk(Card):
+class Hero(Card):
     skill_name = models.CharField(max_length=50)
     skill_cost = models.IntegerField('技能费用（-1为被动英雄技能）', null=True)
     skill = models.CharField(max_length=400)
