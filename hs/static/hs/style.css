@@ -93,7 +93,11 @@ th {
 }
 
 a {
-    color: green;
+    color: brown;
+}
+
+.back {
+    color: white;
 }
 
 html {
