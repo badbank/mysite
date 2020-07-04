@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Magic, Minion, Hero, Weapon, Version, Skill
+from .models import Spell, Minion, Hero, Weapon, Version, Skill
 
 
 class MinionAdmin(admin.ModelAdmin):
@@ -18,7 +18,7 @@ class MinionAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 
-class MagicAdmin(admin.ModelAdmin):
+class SpellAdmin(admin.ModelAdmin):
     list_display = ('name',
                     'job',
                     'rarity',
@@ -82,7 +82,7 @@ class SkillAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Minion, MinionAdmin)
-admin.site.register(Magic, MagicAdmin)
+admin.site.register(Spell, SpellAdmin)
 admin.site.register(Hero, HeroAdmin)
 admin.site.register(Weapon, WeaponAdmin)
 admin.site.register(Version, VersionAdmin)

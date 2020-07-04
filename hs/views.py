@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from pydoc import locate
-from .models import Card, Minion, Magic, Weapon, Hero, Skill, JOB_CHOICE, RARITY_CHOICE, MINION_TYPE_CHOICE
+from .models import Card, Minion, Spell, Weapon, Hero, Skill, JOB_CHOICE, RARITY_CHOICE, MINION_TYPE_CHOICE
 from urllib.parse import urlencode
 
 
@@ -56,13 +56,13 @@ def order(request, real_type_name):
 
 def index(request):
     all_minions = Minion.objects.all()
-    all_magics = Magic.objects.all()
+    all_spells = Spell.objects.all()
     all_weapons = Weapon.objects.all()
     all_heroes = Hero.objects.all()
     all_skills = Skill.objects.all()
     context = {
         'all_minions': all_minions,
-        'all_magics': all_magics,
+        'all_spells': all_spells,
         'all_weapons': all_weapons,
         'all_heroes': all_heroes,
         'all_skills': all_skills
@@ -84,7 +84,7 @@ def typedetail(request, real_type_name):
             all_cards.append(real_card)
     if real_type_name == 'Minion':
         type_name = '随从'
-    elif real_type_name == 'Magic':
+    elif real_type_name == 'Spell':
         type_name = '法术'
     elif real_type_name == 'Weapon':
         type_name = '武器'
@@ -121,7 +121,7 @@ def detail(request, real_type_name, real_id):
                 'minion_health': card.health,
                 'minion_type': minion_type
             }
-        elif real_type_name == 'Magic':
+        elif real_type_name == 'Spell':
             type_name = '法术'
             context_of_single_type = {}
         elif real_type_name == 'Weapon':

@@ -92,7 +92,7 @@ class Card(models.Model):
     @staticmethod
     def all_cards():
         all_minions = list(Minion.objects.all())
-        all_magics = list(Magic.objects.all())
+        all_magics = list(Spell.objects.all())
         all_dks = list(Hero.objects.all())
         all_weapons = list(Weapon.objects.all())
         all_skills = list(Skill.objects.all())
@@ -115,7 +115,7 @@ class Minion(Card):
     type = models.IntegerField(choices=MINION_TYPE_CHOICE)
 
 
-class Magic(Card):
+class Spell(Card):
     pass
 
 

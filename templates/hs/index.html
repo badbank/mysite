@@ -30,11 +30,11 @@
         {% endfor %}
     </ul>
     <hr/>
-    <h2><a href="/hs/Magic/">法术</a></h2>
+    <h2><a href="/hs/Spell/">法术</a></h2>
     <ul>
-        {% for card in all_magics %}
+        {% for card in all_spells %}
             <li><a class="{{ card.real_rarity_name }}"
-                   href="/hs/Magic/{{ card.id }}/">{{ card.name }}</a></li>
+                   href="/hs/Spell/{{ card.id }}/">{{ card.name }}</a></li>
         {% endfor %}
     </ul>
     <hr/>
