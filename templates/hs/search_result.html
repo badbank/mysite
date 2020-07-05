@@ -12,13 +12,14 @@
 <body>
 <header>
     <h1>“{{ card_name_part }}”的查询结果</h1>
-    <a href="https://hs.blizzard.cn/home" title="炉石官网"><img src="{% static 'hs/images/logo.png' %}" alt="炉石logo"></a>
     <nav>
+        <a href="/hs/" class="back">返回主页</a>
         <form method="get">
             <input type="search" name="card_name_part" placeholder="查找卡牌">
             <input type="submit" value="搜索">
         </form>
     </nav>
+    <a href="https://hs.blizzard.cn/home" title="炉石官网"><img src="{% static 'hs/images/logo.png' %}" alt="炉石logo"></a>
 </header>
 <main>
     <hr/>
@@ -31,7 +32,6 @@
                    href="/hs/{{ card.real_type_name }}/{{ card.id }}/">{{ card.name }}</a></li>
         {% endfor %}
     </ul>
-    <a href="/hs/">返回主页</a>
     <hr/>
 </main>
 <footer>

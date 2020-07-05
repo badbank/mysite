@@ -11,9 +11,11 @@
 </head>
 <body>
 <main>
-    <h1>{{ card_name }}</h1>
+    <div id="app">
+        <h1 :title="id">{{ card_name }}</h1>
+    </div>
     <nav>
-        <a class="back" href='/hs/'>返回首页</a>
+        <a class="back" href='/hs/'>返回主页</a>
     </nav>
     <br/>
     <img src="{% static image_location %}" alt={{ card_name }}>
@@ -93,6 +95,17 @@
         <p><a href="/hs/Hero/{{ card_id }}"><em>对应卡牌</em></a></p>
     {% endif %}
 </main>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            id:{{ card_id }}
+        }
+    })
+</script>
 
 <footer>
     <p>
