@@ -52,6 +52,7 @@ class HeroAdmin(admin.ModelAdmin):
                     'rarity',
                     'cost',
                     'effect',
+                    'armor',
                     'skill_cost',
                     'skill_name',
                     'skill',

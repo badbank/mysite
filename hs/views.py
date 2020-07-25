@@ -137,6 +137,7 @@ def detail(request, real_type_name, real_id):
             else:
                 hero_skill_cost = card.skill_cost
             context_of_single_type = {
+                'hero_armor': card.armor,
                 'hero_skill_cost': hero_skill_cost,
                 'hero_skill_name': card.skill_name,
                 'hero_skill': card.skill

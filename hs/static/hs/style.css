@@ -101,7 +101,7 @@ a {
 }
 
 html {
-    background: url("/static/hs/images/background.gif") no-repeat, url("/static/hs/images/bg2.jpg");
+    background: url("/static/hs/images/background.jpg ") no-repeat, url("/static/hs/images/bg2.jpg");
     font-family: "Microsoft YaHei UI";
 }
 

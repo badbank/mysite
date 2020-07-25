@@ -54,18 +54,20 @@ class Version(models.Model):
     def is_normal(self):
         if timezone.localdate() >= self.pub_date >= timezone.localdate() - datetime.timedelta(days=730):
             return '标准'
+        elif timezone.localdate() < self.pub_date:
+            return '新版本预览'
         else:
             return '狂野'
 
 
 class Card(models.Model):
-    name = models.CharField(max_length=50)
-    cost = models.IntegerField()
-    job = models.IntegerField(choices=JOB_CHOICE)
-    rarity = models.IntegerField(choices=RARITY_CHOICE)
-    effect = models.CharField(max_length=800)
-    explanation = models.CharField(max_length=800, null=True)
-    pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50, verbose_name='卡牌名称')
+    cost = models.IntegerField(verbose_name='卡牌费用')
+    job = models.IntegerField(choices=JOB_CHOICE, verbose_name='所属职业')
+    rarity = models.IntegerField(choices=RARITY_CHOICE, verbose_name='卡牌稀有度')
+    effect = models.CharField(max_length=800, verbose_name='卡牌效果')
+    explanation = models.CharField(max_length=800, null=True, verbose_name='卡牌背景描述')
+    pub_version = models.ForeignKey(Version, on_delete=models.CASCADE, verbose_name='公布版本')
 
     @property
     def real_type_name(self):
@@ -93,10 +95,10 @@ class Card(models.Model):
     def all_cards():
         all_minions = list(Minion.objects.all())
         all_magics = list(Spell.objects.all())
-        all_dks = list(Hero.objects.all())
+        all_heroes = list(Hero.objects.all())
         all_weapons = list(Weapon.objects.all())
         all_skills = list(Skill.objects.all())
-        all_cards = all_minions + all_magics + all_dks + all_weapons + all_skills
+        all_cards = all_minions + all_magics + all_heroes + all_weapons + all_skills
         return all_cards
 
     class Meta:
@@ -105,14 +107,16 @@ class Card(models.Model):
     def is_normal(self):
         if timezone.localdate() >= self.pub_version.pub_date >= timezone.localdate() - datetime.timedelta(days=730):
             return '标准'
+        elif timezone.localdate() < self.pub_version.pub_date:
+            return '新版本预览'
         else:
             return '狂野'
 
 
 class Minion(Card):
-    attack = models.IntegerField()
-    health = models.IntegerField()
-    type = models.IntegerField(choices=MINION_TYPE_CHOICE)
+    attack = models.IntegerField(verbose_name='攻击力')
+    health = models.IntegerField(default=1, verbose_name='生命值')
+    type = models.IntegerField(choices=MINION_TYPE_CHOICE, verbose_name='类型')
 
 
 class Spell(Card):
@@ -120,23 +124,24 @@ class Spell(Card):
 
 
 class Weapon(Card):
-    attack = models.IntegerField()
-    durability = models.IntegerField(default=1)
+    attack = models.IntegerField(verbose_name='攻击力')
+    durability = models.IntegerField(default=1, verbose_name='耐久度')
 
 
 class Hero(Card):
-    skill_name = models.CharField(max_length=50)
-    skill_cost = models.IntegerField('技能费用（-1为被动英雄技能）', null=True)
-    skill = models.CharField(max_length=400)
+    armor = models.IntegerField(verbose_name='护甲值')
+    skill_name = models.CharField(max_length=50, verbose_name='英雄技能名称')
+    skill_cost = models.IntegerField(verbose_name='技能费用（-1为被动英雄技能）', null=True)
+    skill = models.CharField(max_length=400, verbose_name='英雄技能效果')
 
 
 class Skill(models.Model):
-    name = models.CharField(max_length=50)
-    cost = models.IntegerField('技能费用（-1为被动英雄技能）')
-    job = models.IntegerField(choices=JOB_CHOICE)
-    effect = models.CharField(max_length=800)
+    name = models.CharField(max_length=50, verbose_name='英雄技能名称')
+    cost = models.IntegerField(verbose_name='技能费用（-1为被动英雄技能）')
+    job = models.IntegerField(choices=JOB_CHOICE, verbose_name='所属职业')
+    effect = models.CharField(max_length=800, verbose_name='英雄技能效果')
     rarity = (6, '衍生')
-    pub_version = models.ForeignKey(Version, on_delete=models.CASCADE)
+    pub_version = models.ForeignKey(Version, on_delete=models.CASCADE, verbose_name='公布版本')
 
     @property
     def real_rarity_name(self):
