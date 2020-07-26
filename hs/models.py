@@ -2,24 +2,6 @@ from django.db import models
 from django.utils import timezone
 import datetime
 
-JOB_CHOICE = (
-    (1, '法师'),
-    (2, '猎人'),
-    (3, '战士'),
-    (4, '萨满祭司'),
-    (5, '德鲁伊'),
-    (6, '牧师'),
-    (7, '潜行者'),
-    (8, '圣骑士'),
-    (9, '术士'),
-    (10, '污手党（猎人、战士、圣骑士）'),
-    (11, '暗金教（法师、牧师、术士）'),
-    (12, '青莲帮（萨满祭司、德鲁伊、潜行者）'),
-    (13, '中立'),
-    (14, '衍生'),
-    (15, '恶魔猎手')
-)
-
 RARITY_CHOICE = (
     (1, '基本'),
     (2, '普通'),
@@ -60,10 +42,18 @@ class Version(models.Model):
             return '狂野'
 
 
+class Job(models.Model):
+    name = models.CharField(max_length=100, verbose_name='职业名称')
+    color = models.CharField(max_length=100, verbose_name='职业颜色')
+
+    def __str__(self):
+        return self.name
+
+
 class Card(models.Model):
     name = models.CharField(max_length=50, verbose_name='卡牌名称')
     cost = models.IntegerField(verbose_name='卡牌费用')
-    job = models.IntegerField(choices=JOB_CHOICE, verbose_name='所属职业')
+    job = models.ForeignKey(Job, on_delete=models.CASCADE, verbose_name='所属职业')
     rarity = models.IntegerField(choices=RARITY_CHOICE, verbose_name='卡牌稀有度')
     effect = models.CharField(max_length=800, verbose_name='卡牌效果')
     explanation = models.CharField(max_length=800, null=True, verbose_name='卡牌背景描述')
@@ -138,7 +128,7 @@ class Hero(Card):
 class Skill(models.Model):
     name = models.CharField(max_length=50, verbose_name='英雄技能名称')
     cost = models.IntegerField(verbose_name='技能费用（-1为被动英雄技能）')
-    job = models.IntegerField(choices=JOB_CHOICE, verbose_name='所属职业')
+    job = models.ForeignKey(Job, on_delete=models.CASCADE, verbose_name='所属职业')
     effect = models.CharField(max_length=800, verbose_name='英雄技能效果')
     rarity = (6, '衍生')
     pub_version = models.ForeignKey(Version, on_delete=models.CASCADE, verbose_name='公布版本')
