@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from pydoc import locate
-from .models import Card, Minion, Spell, Weapon, Hero, Skill, Job, RARITY_CHOICE, MINION_TYPE_CHOICE
+from .models import Card, Minion, Spell, Weapon, Hero, Skill
 from urllib.parse import urlencode
 
 
@@ -103,18 +103,16 @@ def detail(request, real_type_name, real_id):
     real_type = locate('hs.models.' + real_type_name)
     card = get_object_or_404(real_type, pk=real_id)
     if real_type_name != 'Skill':
-        rarity_value = card.rarity
         card_pub_version = card.pub_version
         job = card.job
-        rarity = RARITY_CHOICE.__getitem__(rarity_value - 1)[1]
+        rarity = card.rarity
         cost = card.cost
         effect = card.effect
         explanation = card.explanation
         image_location = 'hs/images/' + real_type_name + str(real_id) + '.png'
         if real_type_name == 'Minion':
             type_name = '随从'
-            type_value = card.type
-            minion_type = MINION_TYPE_CHOICE.__getitem__(type_value - 1)[1]
+            minion_type = card.type
             context_of_single_type = {
                 'minion_attack': card.attack,
                 'minion_health': card.health,
@@ -145,8 +143,8 @@ def detail(request, real_type_name, real_id):
             'image_location': image_location,
             'card_id': real_id,
             'card_name': card.name,
-            'card_job': job,
-            'card_rarity': rarity,
+            'card_job': card.job,
+            'card_rarity': card.rarity,
             'card_type': type_name,
             'card_cost': cost,
             'card_effect': effect,

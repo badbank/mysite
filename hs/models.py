@@ -2,39 +2,34 @@ from django.db import models
 from django.utils import timezone
 import datetime
 
-RARITY_CHOICE = (
-    (1, '基本'),
-    (2, '普通'),
-    (3, '稀有'),
-    (4, '史诗'),
-    (5, '传说'),
-    (6, '衍生')
-)
 
-MINION_TYPE_CHOICE = (
-    (1, '无'),
-    (2, '野兽'),
-    (3, '恶魔'),
-    (4, '元素'),
-    (5, '龙'),
-    (6, '鱼人'),
-    (7, '机械'),
-    (8, '海盗'),
-    (9, '图腾'),
-    (10, '全部')
-)
+class Rarity(models.Model):
+    name = models.CharField(max_length=100, verbose_name='稀有度级别')
+    color = models.CharField(max_length=100, verbose_name='稀有度宝石颜色')
+    has_dragon = models.BooleanField(verbose_name='有龙标')
+
+    def __str__(self):
+        return self.name
+
+
+class MinionType(models.Model):
+    name = models.CharField(max_length=100, verbose_name='随从类型标签名称')
+
+    def __str__(self):
+        return self.name
 
 
 class Version(models.Model):
-    name = models.CharField(max_length=100)
-    pub_date = models.DateField()
-    ordering = models.IntegerField()
+    name = models.CharField(max_length=100, verbose_name='版本名称')
+    pub_date = models.DateField(verbose_name='上线日期')
+    ordering = models.IntegerField(verbose_name='版本序号')
 
     def __str__(self):
         return self.name
 
     def is_normal(self):
-        if timezone.localdate() >= self.pub_date >= timezone.localdate() - datetime.timedelta(days=730):
+        if timezone.localdate() >= self.pub_date >= timezone.localdate() - datetime.timedelta(days=730) \
+                or self.name == '基本' or self.name == '经典':
             return '标准'
         elif timezone.localdate() < self.pub_date:
             return '新版本预览'
@@ -54,7 +49,7 @@ class Card(models.Model):
     name = models.CharField(max_length=50, verbose_name='卡牌名称')
     cost = models.IntegerField(verbose_name='卡牌费用')
     job = models.ForeignKey(Job, on_delete=models.CASCADE, verbose_name='所属职业')
-    rarity = models.IntegerField(choices=RARITY_CHOICE, verbose_name='卡牌稀有度')
+    rarity = models.ForeignKey(Rarity, on_delete=models.CASCADE, verbose_name='卡牌稀有度')
     effect = models.CharField(max_length=800, verbose_name='卡牌效果')
     explanation = models.CharField(max_length=800, null=True, verbose_name='卡牌背景描述')
     pub_version = models.ForeignKey(Version, on_delete=models.CASCADE, verbose_name='公布版本')
@@ -65,15 +60,15 @@ class Card(models.Model):
 
     @property
     def real_rarity_name(self):
-        if self.rarity == 1:
+        if self.rarity_id == 1:
             return 'basic'
-        elif self.rarity == 2:
+        elif self.rarity_id == 2:
             return 'normal'
-        elif self.rarity == 3:
+        elif self.rarity_id == 3:
             return 'rare'
-        elif self.rarity == 4:
+        elif self.rarity_id == 4:
             return 'epic'
-        elif self.rarity == 5:
+        elif self.rarity_id == 5:
             return 'legendary'
         else:
             return 'derived'
@@ -95,7 +90,8 @@ class Card(models.Model):
         abstract = True
 
     def is_normal(self):
-        if timezone.localdate() >= self.pub_version.pub_date >= timezone.localdate() - datetime.timedelta(days=730):
+        if timezone.localdate() >= self.pub_version.pub_date >= timezone.localdate() - datetime.timedelta(days=730) \
+                or self.name == '基本' or self.name == '经典':
             return '标准'
         elif timezone.localdate() < self.pub_version.pub_date:
             return '新版本预览'
@@ -106,7 +102,7 @@ class Card(models.Model):
 class Minion(Card):
     attack = models.IntegerField(verbose_name='攻击力')
     health = models.IntegerField(default=1, verbose_name='生命值')
-    type = models.IntegerField(choices=MINION_TYPE_CHOICE, verbose_name='类型')
+    type = models.ForeignKey(MinionType, on_delete=models.CASCADE, verbose_name='随从类型')
 
 
 class Spell(Card):
@@ -130,7 +126,7 @@ class Skill(models.Model):
     cost = models.IntegerField(verbose_name='技能费用（-1为被动英雄技能）')
     job = models.ForeignKey(Job, on_delete=models.CASCADE, verbose_name='所属职业')
     effect = models.CharField(max_length=800, verbose_name='英雄技能效果')
-    rarity = (6, '衍生')
+    rarity = '英雄技能'
     pub_version = models.ForeignKey(Version, on_delete=models.CASCADE, verbose_name='公布版本')
 
     @property
