@@ -48,7 +48,7 @@ class Job(models.Model):
 class Card(models.Model):
     name = models.CharField(max_length=50, verbose_name='卡牌名称')
     cost = models.IntegerField(verbose_name='卡牌费用')
-    job = models.ForeignKey(Job, on_delete=models.CASCADE, verbose_name='所属职业')
+    job = models.ManyToManyField(Job, verbose_name='所属职业')
     rarity = models.ForeignKey(Rarity, on_delete=models.CASCADE, verbose_name='卡牌稀有度')
     effect = models.CharField(max_length=800, verbose_name='卡牌效果')
     explanation = models.CharField(max_length=800, null=True, verbose_name='卡牌背景描述')
