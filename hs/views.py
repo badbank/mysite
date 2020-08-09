@@ -104,8 +104,6 @@ def detail(request, real_type_name, real_id):
     card = get_object_or_404(real_type, pk=real_id)
     if real_type_name != 'Skill':
         card_pub_version = card.pub_version
-        job = card.job
-        rarity = card.rarity
         cost = card.cost
         effect = card.effect
         explanation = card.explanation
@@ -143,7 +141,7 @@ def detail(request, real_type_name, real_id):
             'image_location': image_location,
             'card_id': real_id,
             'card_name': card.name,
-            'card_job': card.job,
+            'card_job': card.get_jobs(),
             'card_rarity': card.rarity,
             'card_type': type_name,
             'card_cost': cost,
