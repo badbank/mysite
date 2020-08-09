@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import Spell, Minion, Hero, Weapon, Version, Skill, Job, Rarity, MinionType
 
 
+@admin.register(Minion)
 class MinionAdmin(admin.ModelAdmin):
     list_display = ('name',
                     'job',
@@ -24,6 +25,7 @@ class MinionAdmin(admin.ModelAdmin):
     search_fields = ['name', 'effect', 'explanation']
 
 
+@admin.register(Spell)
 class SpellAdmin(admin.ModelAdmin):
     list_display = ('name',
                     'job',
@@ -36,6 +38,7 @@ class SpellAdmin(admin.ModelAdmin):
     search_fields = ['name', 'effect', 'explanation']
 
 
+@admin.register(Weapon)
 class WeaponAdmin(admin.ModelAdmin):
     list_display = ('name',
                     'job',
@@ -56,6 +59,7 @@ class WeaponAdmin(admin.ModelAdmin):
     search_fields = ['name', 'effect', 'explanation']
 
 
+@admin.register(Hero)
 class HeroAdmin(admin.ModelAdmin):
     list_display = ('name',
                     'job',
@@ -78,6 +82,7 @@ class HeroAdmin(admin.ModelAdmin):
     search_fields = ['name', 'effect', 'explanation', 'skill_name', 'skill']
 
 
+@admin.register(Version)
 class VersionAdmin(admin.ModelAdmin):
     list_display = ('name',
                     'pub_date',
@@ -87,6 +92,7 @@ class VersionAdmin(admin.ModelAdmin):
     search_fields = ['name']
 
 
+@admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
     list_display = (
         'name',
@@ -99,6 +105,7 @@ class SkillAdmin(admin.ModelAdmin):
     search_fields = ['name', 'effect']
 
 
+@admin.register(Job)
 class JobAdmin(admin.ModelAdmin):
     list_display = (
         'name',
@@ -106,22 +113,13 @@ class JobAdmin(admin.ModelAdmin):
     )
 
 
+@admin.register(Rarity)
 class RarityAdmin(admin.ModelAdmin):
     list_display = ('name',
                     'color',
                     'has_dragon')
 
 
+@admin.register(MinionType)
 class MinionTypeAdmin(admin.ModelAdmin):
     list_display = ('name',)
-
-
-admin.site.register(Minion, MinionAdmin)
-admin.site.register(Spell, SpellAdmin)
-admin.site.register(Hero, HeroAdmin)
-admin.site.register(Weapon, WeaponAdmin)
-admin.site.register(Version, VersionAdmin)
-admin.site.register(Skill, SkillAdmin)
-admin.site.register(Job, JobAdmin)
-admin.site.register(Rarity, RarityAdmin)
-admin.site.register(MinionType, MinionTypeAdmin)
