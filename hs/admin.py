@@ -5,7 +5,7 @@ from .models import Spell, Minion, Hero, Weapon, Version, Skill, Job, Rarity, Mi
 @admin.register(Minion)
 class MinionAdmin(admin.ModelAdmin):
     list_display = ('name',
-                    'job',
+                    'get_jobs',
                     'rarity',
                     'cost',
                     'attack',
@@ -28,7 +28,7 @@ class MinionAdmin(admin.ModelAdmin):
 @admin.register(Spell)
 class SpellAdmin(admin.ModelAdmin):
     list_display = ('name',
-                    'job',
+                    'get_jobs',
                     'rarity',
                     'cost',
                     'effect',
@@ -41,7 +41,7 @@ class SpellAdmin(admin.ModelAdmin):
 @admin.register(Weapon)
 class WeaponAdmin(admin.ModelAdmin):
     list_display = ('name',
-                    'job',
+                    'get_jobs',
                     'rarity',
                     'cost',
                     'attack',
@@ -62,7 +62,7 @@ class WeaponAdmin(admin.ModelAdmin):
 @admin.register(Hero)
 class HeroAdmin(admin.ModelAdmin):
     list_display = ('name',
-                    'job',
+                    'get_jobs',
                     'rarity',
                     'cost',
                     'effect',
